@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Events</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <style>
+            body {
+                --tw-bg-opacity: 1;
+                background-color: rgb(255 255 255/var(--tw-bg-opacity));
+            }
+
+            table {
+                border-collapse: collapse;
+                display: inline-block;
+            }
+
+            td,
+            th {
+                border-top: 1px solid gray;
+                padding: 1.25rem;
+                text-align: center;
+                font-size: 1.5rem;
+                margin: 3rem;
+            }
+
+            th {
+                font-weight: bold;
+                background-color: #E6E6E6;
+            }
+
+            div {
+                margin: 2rem;
+            }
+
+            #calendar {
+                padding-right: 2rem;
+                width: 30%;
+            }
+
+            #events {
+                float: left;
+            }
+
+            #today {
+                color: #fff
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            #calendar,
+            #events,
+            #quote {
+                float: left;
+                width: 30%;
+                max-width: calc(40% - 1.5rem);
+                padding: 5px;
+            }
+
+            h2 {
+                display: inline-block;
+                position: sticky;
+                top: 1.5rem;
+                margin-left: 3rem;
+            }
+        </style>
+        <script type="module" src="/eventsBundle.js"></script>
+    </head>
+
+    <body>
+        <div id="month"></div>
+        <div class="row">
+            <div id="calendar"></div>
+            <div id="events"></div>
+            <h2 id="quote">9 in 10 people in Singapore do not smoke. Let's be one of them.</h2>
+        </div>
+
+        <script>
+            function createCalendar(calendar, year, month) {
+                let d = new Date(year, month);
+                let monthsArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                let currentMonth = monthsArray[month];
+                document.getElementById("month").innerHTML = "<h1>" + currentMonth + "<h1>"
+                let table = '<table><tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th><th>FR</th><th>SA</th><th>SU</th></tr><tr>';
+
+                for (let i = 0; i < getDay(d); i++) {
+                    table += '<td></td>';
+                }
+
+                const today = new Date();
+                while (d.getMonth() == month) {
+                    if (today.getDate() === d.getDate()) {
+                        table += '<td id= "today" style="background-color:#008294">' + d.getDate() + '</td>';
+                    } else {
+                        table += '<td>' + d.getDate() + '</td>';
+                    }
+
+                    if (getDay(d) % 7 == 6) {
+                        table += '</tr><tr>';
+                    }
+
+                    d.setDate(d.getDate() + 1);
+                }
+
+                if (getDay(d) != 0) {
+                    for (let i = getDay(d); i < 7; i++) {
+                        table += '<td></td>';
+                    }
+                }
+
+                table += '</tr></table>';
+
+                calendar.innerHTML = table;
+            }
+
+            function getDay(date) {
+                let day = date.getDay();
+                if (day == 0) day = 7;
+                return day - 1;
+            }
+            let currentYear = new Date().getFullYear();
+            let currentMonth = new Date().getMonth();
+            createCalendar(calendar, currentYear, currentMonth);
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+            crossorigin="anonymous"></script>
+    </body>
+
+</html>
