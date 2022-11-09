@@ -6,7 +6,6 @@ import {
   getDocs,
   addDoc,
   query,
-  where,
   limit,
   Timestamp,
 } from "firebase/firestore";
@@ -25,13 +24,13 @@ const db = getFirestore(app);
 
 const events = collection(db, "events");
 
-async function createEvent(eventTitle, description, eventDate, category) {
-  console.log(eventTitle, description, eventDate, category);
+async function createEvent() {
   const newDoc = await addDoc(events, {
-    title: eventTitle,
-    description: description,
-    date: Timestamp.fromDate(eventDate),
-    category: category,
+    title: "Board Games at King and the Pawn",
+    description:
+      "Meet new friends (or hang out with old ones) on a fun night out with games , food, and drinks! Individuals and groups are both welcome.",
+    date: Timestamp.fromDate(new Date("Decemberber 3, 2022 17:30:00")),
+    category: "games",
   });
 }
 
@@ -39,7 +38,7 @@ async function queryDoc() {
   const eventQuery = query(events, limit(10));
   const querySnapshot = await getDocs(eventQuery);
   let cardOutput =
-    "<div class='card border-dark mb-3 col-lg-8 col-md-6 ' style='width: 24rem;''>";
+    "<div class='card border-dark mb-3 col-lg-8 col-md-6 ' style='width: 30rem;''>";
   const options = {
     weekday: "short",
     year: "numeric",
@@ -63,10 +62,11 @@ async function queryDoc() {
         "</p>" +
         "</div>" +
         "</div>" +
-        "<div class='card border-dark mb-3 col-8' style='width: 24rem;''>")
+        "<div class='card border-dark mb-3 col-8' style='width: 30rem;''>")
   );
 
   document.getElementById("events").innerHTML = cardOutput;
 }
 
+// createEvent();
 queryDoc();

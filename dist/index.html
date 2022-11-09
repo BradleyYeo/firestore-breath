@@ -7,72 +7,21 @@
         <title>Events</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-        <style>
-            body {
-                --tw-bg-opacity: 1;
-                background-color: rgb(255 255 255/var(--tw-bg-opacity));
-            }
-
-            table {
-                border-collapse: collapse;
-                display: inline-block;
-            }
-
-            td,
-            th {
-                border-top: 1px solid gray;
-                padding: 1.25rem;
-                text-align: center;
-                font-size: 1.5rem;
-                margin: 3rem;
-            }
-
-            th {
-                font-weight: bold;
-                background-color: #E6E6E6;
-            }
-
-            div {
-                margin: 2rem;
-            }
-
-            #calendar {
-                padding-right: 2rem;
-                width: 30%;
-            }
-
-            #events {
-                float: left;
-            }
-
-            #today {
-                color: #fff
-            }
-
-            * {
-                box-sizing: border-box;
-            }
-
-            #calendar,
-            #events,
-            #quote {
-                float: left;
-                width: 30%;
-                max-width: calc(40% - 1.5rem);
-                padding: 5px;
-            }
-
-            h2 {
-                display: inline-block;
-                position: sticky;
-                top: 1.5rem;
-                margin-left: 3rem;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="style.css" />
         <script type="module" src="/eventsBundle.js"></script>
     </head>
 
     <body>
+        <header>
+            <a href="#" class="logo">Breathtakers</a>
+            <ul>
+                <li><a href="https://breathtaker-home-j8b24bz4n-bradleyyeo.vercel.app/">Home</a></li>
+                <li><a href="#">Sign Up</a></li>
+                <li><a href="#">Log In</a></li>
+                <li><a href="#creators">Creators</a></li>
+                <li><a href="https://freecode-56b4c.web.app/" class="active">Events</a></li>
+            </ul>
+        </header>
         <div id="month"></div>
         <div class="row">
             <div id="calendar"></div>
@@ -86,7 +35,7 @@
                 let monthsArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
                 let currentMonth = monthsArray[month];
                 document.getElementById("month").innerHTML = "<h1>" + currentMonth + "<h1>"
-                let table = '<table><tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th><th>FR</th><th>SA</th><th>SU</th></tr><tr>';
+                let table = '<table style="background-color:#f2f2f2"><tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th><th>FR</th><th>SA</th><th>SU</th></tr><tr>';
 
                 for (let i = 0; i < getDay(d); i++) {
                     table += '<td></td>';
