@@ -60,11 +60,6 @@ header ul li a.active {
   color: #2b1055;
 }
 
-/* body {
-                --tw-bg-opacity: 1;
-                background-color: rgb(255 255 255/var(--tw-bg-opacity));
-            } */
-
 table {
   border-collapse: collapse;
   display: inline-block;
@@ -86,6 +81,23 @@ th {
 
 div {
   margin: 2rem;
+}
+
+#month {
+  animation-duration: 3s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
 }
 
 #calendar {

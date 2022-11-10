@@ -26,10 +26,10 @@ const events = collection(db, "events");
 
 async function createEvent() {
   const newDoc = await addDoc(events, {
-    title: "Board Games at King and the Pawn",
+    title: "Board Games at Queen and the Pawn",
     description:
       "Meet new friends (or hang out with old ones) on a fun night out with games , food, and drinks! Individuals and groups are both welcome.",
-    date: Timestamp.fromDate(new Date("Decemberber 3, 2022 17:30:00")),
+    date: Timestamp.fromDate(new Date("November 16, 2022 17:30:00")),
     category: "games",
   });
 }
@@ -39,6 +39,7 @@ async function queryDoc() {
   const querySnapshot = await getDocs(eventQuery);
   let cardOutput =
     "<div class='card border-dark mb-3 col-lg-8 col-md-6 ' style='width: 30rem;''>";
+
   const options = {
     weekday: "short",
     year: "numeric",
@@ -46,7 +47,7 @@ async function queryDoc() {
     day: "numeric",
   };
 
-  const allDocs = querySnapshot.docs.forEach(
+  querySnapshot.docs.forEach(
     (e) =>
       (cardOutput +=
         "<div class='card-body'>" +

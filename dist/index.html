@@ -22,7 +22,11 @@
                 <li><a href="https://freecode-56b4c.web.app/" class="active">Events</a></li>
             </ul>
         </header>
-        <div id="month"></div>
+        <br><br>
+        <div class="container">
+            <div id="month"></div>
+        </div>
+
         <div class="row">
             <div id="calendar"></div>
             <div id="events"></div>
@@ -30,11 +34,16 @@
         </div>
 
         <script>
-            function createCalendar(calendar, year, month) {
-                let d = new Date(year, month);
+            function getCurrentMonth() {
+                let month = new Date().getMonth();
                 let monthsArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
                 let currentMonth = monthsArray[month];
-                document.getElementById("month").innerHTML = "<h1>" + currentMonth + "<h1>"
+                document.getElementById("month").innerHTML = "<h1 style='color:yellow'>" + currentMonth + "<h1>"
+                console.log(currentMonth);
+            }
+
+            function createCalendar(calendar, year, month) {
+                let d = new Date(year, month);
                 let table = '<table style="background-color:#f2f2f2"><tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th><th>FR</th><th>SA</th><th>SU</th></tr><tr>';
 
                 for (let i = 0; i < getDay(d); i++) {
@@ -44,7 +53,7 @@
                 const today = new Date();
                 while (d.getMonth() == month) {
                     if (today.getDate() === d.getDate()) {
-                        table += '<td id= "today" style="background-color:#008294">' + d.getDate() + '</td>';
+                        table += '<td id= "today" style="background-color:#2b1055">' + d.getDate() + '</td>';
                     } else {
                         table += '<td>' + d.getDate() + '</td>';
                     }
@@ -72,8 +81,11 @@
                 if (day == 0) day = 7;
                 return day - 1;
             }
+
             let currentYear = new Date().getFullYear();
             let currentMonth = new Date().getMonth();
+
+            getCurrentMonth();
             createCalendar(calendar, currentYear, currentMonth);
         </script>
 
