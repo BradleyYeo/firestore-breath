@@ -8,6 +8,7 @@ import {
   query,
   limit,
   Timestamp,
+  orderBy,
 } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyDoJzxr5VfFnkAr8nyoZ2LKiSYu6dWt1vs",
@@ -26,16 +27,16 @@ const events = collection(db, "events");
 
 async function createEvent() {
   const newDoc = await addDoc(events, {
-    title: "Board Games at Queen and the Pawn",
+    title: "Dim Sum Dinner",
     description:
-      "Meet new friends (or hang out with old ones) on a fun night out with games , food, and drinks! Individuals and groups are both welcome.",
-    date: Timestamp.fromDate(new Date("November 16, 2022 17:30:00")),
+      "Meet new friends (or hang out with old ones) on a fun night out with dim sum and drinks! Individuals and groups are both welcome.",
+    date: Timestamp.fromDate(new Date("November 16, 2022 18:30:00")),
     category: "games",
   });
 }
 
 async function queryDoc() {
-  const eventQuery = query(events, limit(10));
+  const eventQuery = query(events, limit(10), orderBy("date", "asc"));
   const querySnapshot = await getDocs(eventQuery);
   let cardOutput =
     "<div class='card border-dark mb-3 col-lg-8 col-md-6 ' style='width: 30rem;''>";
@@ -49,21 +50,14 @@ async function queryDoc() {
 
   querySnapshot.docs.forEach(
     (e) =>
-      (cardOutput +=
-        "<div class='card-body'>" +
-        "<h3 class='card-title'>" +
-        e.data().title +
-        "</h3>" +
-        "<h5 class='card-subtitle' style='color:#877457'>" +
-        e.data().date.toDate().toLocaleDateString("en-US", options) +
-        "</h5>" +
-        "<br>" +
-        "<p class='card-text'>" +
-        e.data().description +
-        "</p>" +
-        "</div>" +
-        "</div>" +
-        "<div class='card border-dark mb-3 col-8' style='width: 30rem;''>")
+      (cardOutput += `<div class='card-body'>
+      <h3 class='card-title'>${e.data().title}</h3>
+     <h5 class='card-subtitle' style='color:#877457'>${e
+       .data()
+       .date.toDate()
+       .toLocaleDateString("en-US", options)}</h5><br><p class='card-text'>${
+        e.data().description
+      }</p></div></div><div class='card border-dark mb-3 col-8' style='width: 30rem;''>`)
   );
 
   document.getElementById("events").innerHTML = cardOutput;
