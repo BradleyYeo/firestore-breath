@@ -6,7 +6,7 @@ import {
   getDocs,
   addDoc,
   query,
-  limit,
+  where,
   Timestamp,
   orderBy,
 } from "firebase/firestore";
@@ -27,23 +27,48 @@ const events = collection(db, "events");
 
 async function createEvent() {
   const newDoc = await addDoc(events, {
-    title: "Dim Sum Dinner",
+    title: "Japanese Dinner",
     description:
-      "Meet new friends (or hang out with old ones) on a fun night out with dim sum and drinks! Individuals and groups are both welcome.",
-    date: Timestamp.fromDate(new Date("November 16, 2022 18:30:00")),
-    category: "games",
+      "Meet new friends (or hang out with old ones) on a fun night out with sushi and drinks! Individuals and groups are both welcome.",
+    date: Timestamp.fromDate(new Date("November 18, 2022 19:30:00")),
+    category: "food",
   });
 }
 
-function getBadgeValue(event) {
-    const badge = event.target.closest(".badge");
-    return badge.dataset.value;
-    
+function getCheckboxValue() {
+  document.body.addEventListener(
+    "click",
+    (event) => {
+      let checkboxes = document.querySelectorAll(
+        "input[name=category]:checked"
+      );
+      let categories = [];
+      checkboxes.forEach((checkbox) => {
+        if (checkbox.checked) {
+          categories.push(checkbox.value);
+        } else {
+          categories.splice(checkbox.value, 1);
+        }
+      });
+    },
+    true
+  );
+  return categories;
 }
 
 async function queryDoc() {
-    
-  const eventQuery = query(events, limit(10), orderBy("date", "asc"));
+  let categories = getCheckboxValue();
+  let arrCat = [];
+  for (let ele of categories) {
+    arrCat.push(ele.value);
+  }
+
+  const eventQuery = query(
+    events,
+    where("category", "in", arrCat),
+    orderBy("date", "asc")
+  );
+
   const querySnapshot = await getDocs(eventQuery);
   let cardOutput =
     "<div class='card border-dark mb-3 col-lg-8 col-md-6 animate__animated animate__fadeInDown' style='width: 30rem;''>";
