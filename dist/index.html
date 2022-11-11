@@ -1,109 +1,170 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Events</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <script type="module" src="/eventsBundle.js"></script>
+  </head>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Events</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="style.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-        <script type="module" src="/eventsBundle.js"></script>
-    </head>
+  <body>
+    <header>
+      <a href="#" class="logo">Breathtakers</a>
+      <ul>
+        <li>
+          <a
+            href="https://breathtaker-home-j8b24bz4n-bradleyyeo.vercel.app/signedinndex.html"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://breathtaker-home-j8b24bz4n-bradleyyeo.vercel.app/signedinindex.html#creators"
+            >Creators</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://breathtaker-home-j8b24bz4n-bradleyyeo.vercel.app/dashboard.html"
+            class="active"
+            >Dashboard</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://breathtaker-home-j8b24bz4n-bradleyyeo.vercel.app/logout.html"
+            >Log Out</a
+          >
+        </li>
+      </ul>
+    </header>
 
-    <body>
-        <header>
-            <a href="#" class="logo">Breathtakers</a>
-            <ul>
-                <li><a href="https://breathtaker-home-j8b24bz4n-bradleyyeo.vercel.app/">Home</a></li>
-                <li><a href="#">Sign Up</a></li>
-                <li><a href="#">Log In</a></li>
-                <li><a href="#creators">Creators</a></li>
-                <li><a href="https://freecode-56b4c.web.app/" class="active">Events</a></li>
-            </ul>
-        </header>
+    <div id="month" style="padding-top: 80px"></div>
 
+    <div class="row">
+      <div id="calendar"></div>
+      <div id="events">
+        <h3>
+          <input
+            type="checkbox"
+            class="btn-check"
+            id="btn-social"
+            autocomplete="off"
+            value="social"
+          />
+          <label class="btn btn-light" for="btn-social">Social</label>
+          <input
+            type="checkbox"
+            class="btn-check"
+            id="btn-food"
+            autocomplete="off"
+            value="food"
+          />
+          <label class="btn btn-light" for="btn-food">Food</label>
+          <input
+            type="checkbox"
+            class="btn-check"
+            id="btn-exercise"
+            autocomplete="off"
+            value="exercise"
+          />
+          <label class="btn btn-light" for="btn-exercise">Exercise</label>
+        </h3>
+      </div>
+      <h2 id="quote">
+        9 in 10 people in Singapore do not smoke. Let's be one of them.
+      </h2>
+    </div>
 
-        <div id="month" style='padding-top:80px'></div>
+    <script>
+      function getCurrentMonth() {
+        let month = new Date().getMonth();
+        let monthsArray = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+        let currentMonth = monthsArray[month];
+        document.getElementById("month").innerHTML =
+          "<h1 style='color:yellow'>" + currentMonth + "<h1>";
+        console.log(currentMonth);
+      }
 
+      function createCalendar(calendar, year, month) {
+        let d = new Date(year, month);
+        let table =
+          '<table style="background-color:#f2f2f2"><tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th><th>FR</th><th>SA</th><th>SU</th></tr><tr>';
 
+        for (let i = 0; i < getDay(d); i++) {
+          table += "<td></td>";
+        }
 
-        <div class="row">
-            <div id="calendar"></div>
-            <div id="events">
-                <h3>
-                    <input type="checkbox" class="btn-check" id="btn-social" autocomplete="off" value="social">
-                    <label class="btn btn-light" for="btn-social">Social</label>
-                    <input type="checkbox" class="btn-check" id="btn-food" autocomplete="off" value="food">
-                    <label class="btn btn-light" for="btn-food">Food</label>
-                    <input type="checkbox" class="btn-check" id="btn-exercise" autocomplete="off" value="exercise">
-                    <label class="btn btn-light" for="btn-exercise">Exercise</label>
-                </h3>
+        const today = new Date();
+        while (d.getMonth() == month) {
+          if (today.getDate() === d.getDate()) {
+            table +=
+              '<td id= "today" style="background-color:#2b1055">' +
+              d.getDate() +
+              "</td>";
+          } else {
+            table += "<td>" + d.getDate() + "</td>";
+          }
 
-            </div>
-            <h2 id="quote">9 in 10 people in Singapore do not smoke. Let's be one of them.</h2>
-        </div>
+          if (getDay(d) % 7 == 6) {
+            table += "</tr><tr>";
+          }
 
-        <script>
-            function getCurrentMonth() {
-                let month = new Date().getMonth();
-                let monthsArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-                let currentMonth = monthsArray[month];
-                document.getElementById("month").innerHTML = "<h1 style='color:yellow'>" + currentMonth + "<h1>"
-                console.log(currentMonth);
-            }
+          d.setDate(d.getDate() + 1);
+        }
 
-            function createCalendar(calendar, year, month) {
-                let d = new Date(year, month);
-                let table = '<table style="background-color:#f2f2f2"><tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th><th>FR</th><th>SA</th><th>SU</th></tr><tr>';
+        if (getDay(d) != 0) {
+          for (let i = getDay(d); i < 7; i++) {
+            table += "<td></td>";
+          }
+        }
 
-                for (let i = 0; i < getDay(d); i++) {
-                    table += '<td></td>';
-                }
+        table += "</tr></table>";
 
-                const today = new Date();
-                while (d.getMonth() == month) {
-                    if (today.getDate() === d.getDate()) {
-                        table += '<td id= "today" style="background-color:#2b1055">' + d.getDate() + '</td>';
-                    } else {
-                        table += '<td>' + d.getDate() + '</td>';
-                    }
+        calendar.innerHTML = table;
+      }
 
-                    if (getDay(d) % 7 == 6) {
-                        table += '</tr><tr>';
-                    }
+      function getDay(date) {
+        let day = date.getDay();
+        if (day == 0) day = 7;
+        return day - 1;
+      }
 
-                    d.setDate(d.getDate() + 1);
-                }
+      let currentYear = new Date().getFullYear();
+      let currentMonth = new Date().getMonth();
 
-                if (getDay(d) != 0) {
-                    for (let i = getDay(d); i < 7; i++) {
-                        table += '<td></td>';
-                    }
-                }
+      getCurrentMonth();
+      createCalendar(calendar, currentYear, currentMonth);
+    </script>
 
-                table += '</tr></table>';
-
-                calendar.innerHTML = table;
-            }
-
-            function getDay(date) {
-                let day = date.getDay();
-                if (day == 0) day = 7;
-                return day - 1;
-            }
-
-            let currentYear = new Date().getFullYear();
-            let currentMonth = new Date().getMonth();
-
-            getCurrentMonth();
-            createCalendar(calendar, currentYear, currentMonth);
-        </script>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-            crossorigin="anonymous"></script>
-    </body>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
