@@ -35,7 +35,14 @@ async function createEvent() {
   });
 }
 
+function getBadgeValue(event) {
+    const badge = event.target.closest(".badge");
+    return badge.dataset.value;
+    
+}
+
 async function queryDoc() {
+    
   const eventQuery = query(events, limit(10), orderBy("date", "asc"));
   const querySnapshot = await getDocs(eventQuery);
   let cardOutput =
