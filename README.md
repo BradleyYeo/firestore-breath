@@ -11,7 +11,7 @@ npm i
 ```bash
 npx webpack --watch
 ```
-- serve the website on localhost by entering the following command or check out the live website over (here)[https://breathtaker-home-j8b24bz4n-bradleyyeo.vercel.app/]
+- serve the website on localhost by entering the following command or check out the live website over [here](https://breathtaker-home-j8b24bz4n-bradleyyeo.vercel.app/)
 
 ```bash
 npx serve dist
