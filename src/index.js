@@ -48,18 +48,18 @@ async function queryDoc() {
     day: "numeric",
   };
 
-  querySnapshot.docs.forEach(
-    (e) =>
-      (cardOutput += `<div class='card-body'>
+  querySnapshot.docs.forEach(function (e) {
+    
+
+    cardOutput += `<div class='card-body'>
       <h3 class='card-title'>${e.data().title}</h3>
      <h5 class='card-subtitle' style='color:#877457'>${e
        .data()
        .date.toDate()
        .toLocaleDateString("en-US", options)}</h5><br><p class='card-text'>${
-        e.data().description
-      }</p></div></div><div class='card border-dark mb-3 col-8' style='width: 30rem;''>`)
-  );
-
+      e.data().description
+    }</p></div></div><div class='card border-dark mb-3 col-8' style='width: 30rem;''>`;
+  });
   document.getElementById("events").innerHTML = cardOutput;
 }
 
