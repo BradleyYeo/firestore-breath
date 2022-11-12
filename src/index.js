@@ -38,7 +38,7 @@ async function countEvents() {
   const snapshot = await getCountFromServer(events);
   document.getElementById("eventsCount").innerHTML = `<h2>${
     snapshot.data().count
-  } Events</h2>`;
+  } Upcoming Events</h2>`;
   console.log(snapshot.data().count);
 }
 
@@ -68,6 +68,6 @@ async function queryDoc() {
   document.getElementById("events").innerHTML += cardOutput;
 }
 
-createEvent();
+// createEvent();
 countEvents();
 queryDoc();
