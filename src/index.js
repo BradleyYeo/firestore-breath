@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
@@ -6,9 +5,9 @@ import {
   getDocs,
   addDoc,
   query,
-  where,
   Timestamp,
   orderBy,
+  getCountFromServer,
 } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyDoJzxr5VfFnkAr8nyoZ2LKiSYu6dWt1vs",
@@ -27,51 +26,27 @@ const events = collection(db, "events");
 
 async function createEvent() {
   const newDoc = await addDoc(events, {
-    title: "Japanese Dinner",
+    title: "BBQ Dinner",
     description:
-      "Meet new friends (or hang out with old ones) on a fun night out with sushi and drinks! Individuals and groups are both welcome.",
-    date: Timestamp.fromDate(new Date("November 18, 2022 19:30:00")),
+      "Meet new friends (or hang out with old ones) on a fun night out with BBQ chicken and steak! Individuals and groups are both welcome.",
+    date: Timestamp.fromDate(new Date("November 19, 2022 19:30:00")),
     category: "food",
   });
 }
 
-function getCheckboxValue() {
-  document.body.addEventListener(
-    "click",
-    (event) => {
-      let checkboxes = document.querySelectorAll(
-        "input[name=category]:checked"
-      );
-      let categories = [];
-      checkboxes.forEach((checkbox) => {
-        if (checkbox.checked) {
-          categories.push(checkbox.value);
-        } else {
-          categories.splice(checkbox.value, 1);
-        }
-      });
-    },
-    true
-  );
-  return categories;
+async function countEvents() {
+  const snapshot = await getCountFromServer(events);
+  document.getElementById("eventsCount").innerHTML = `<h2>${
+    snapshot.data().count
+  } Events</h2>`;
+  console.log(snapshot.data().count);
 }
 
 async function queryDoc() {
-  let categories = getCheckboxValue();
-  let arrCat = [];
-  for (let ele of categories) {
-    arrCat.push(ele.value);
-  }
-
-  const eventQuery = query(
-    events,
-    where("category", "in", arrCat),
-    orderBy("date", "asc")
-  );
-
+  const eventQuery = query(events, orderBy("date", "asc"));
   const querySnapshot = await getDocs(eventQuery);
   let cardOutput =
-    "<div class='card border-dark mb-3 col-lg-8 col-md-6 animate__animated animate__fadeInDown' style='width: 30rem;''>";
+    "<div class='card border-dark mb-3 col-lg-4 col-md-6 col-sm-10' style='width: 30rem;''>";
 
   const options = {
     weekday: "short",
@@ -88,10 +63,11 @@ async function queryDoc() {
        .date.toDate()
        .toLocaleDateString("en-US", options)}</h5><br><p class='card-text'>${
       e.data().description
-    }</p></div></div><div class='card border-dark mb-3 col-8 animate__animated animate__fadeInDown' style='width: 30rem;''>`;
+    }</p></div></div><div class='card border-dark mb-3 col-lg-4 col-md-6 col-sm-10' style='width: 30rem;''>`;
   });
   document.getElementById("events").innerHTML += cardOutput;
 }
 
-// createEvent();
+createEvent();
+countEvents();
 queryDoc();
