@@ -12,7 +12,6 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   background: linear-gradient(#2b1055, #7597de);
-
 }
 
 header {
@@ -31,7 +30,7 @@ header .logo {
   color: #ffff;
   font-weight: 700;
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 2em;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-top: 10px;
@@ -41,21 +40,19 @@ header ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left:50px;
 }
 
 header ul li {
   list-style: none;
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
 header ul li a {
   text-decoration: none;
   padding: 6px 15px;
   color: #ffff;
-  font-size: 12px;
-  border-radius: 24px;
-
+  font-size: 0.75rem;
+  border-radius: 20px;
 }
 
 header ul li a:hover,
@@ -64,109 +61,73 @@ header ul li a.active {
   color: #2b1055;
 }
 
-section {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  padding: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-section:before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 100px;
-  background: linear-gradient(to top, #1c0522, transparent);
-  z-index: 1000;
-}
-
-section img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-}
-
-section img#moon {
-  mix-blend-mode: screen;
-}
-
-section img#mountains_front {
-  z-index: 10;
-}
-
-#welcometext {
-  position: absolute;
-  /* right: -20px; */
-  font-weight: bold;
-  color: #ffff;
-  white-space: nowrap;
-  font-size: 4.5vw;
-  /* font-size: 7.5vw; */
-  /* font-size: 1.5em; */
-  z-index: 9;
-}
-
-#btn {
-  text-decoration: none;
+table {
+  border-collapse: collapse;
   display: inline-block;
-  padding: 8px 30px;
-  border-radius: 40px;
-  background: #fff;
-  color: #2b1055;
-  font-size: 1.5em;
-  z-index: 9;
-  transform: translateY(100px);
 }
 
-.sec {
-  position: relative;
-  padding: 100px;
-  background: #1c0522;
+td,
+th {
+  border-top: 1px solid gray;
+  padding: 1.25rem;
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 3rem;
 }
 
-.sec h2 {
-  font-size: 2em;
-  margin-bottom: 10px;
+th {
+  font-weight: bold;
+  background-color: #e6e6e6;
+}
+
+div {
+  margin: 2rem;
+}
+
+#month {
+  animation-duration: 3s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: -40%;
+    width: 100%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 300%;
+  }
+}
+
+#events {
+  float: left;
+}
+
+#today {
   color: #fff;
 }
 
-.sec p {
-  font-size: 1em;
-  color: #fff;
+* {
+  box-sizing: border-box;
 }
 
-.sec ul {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#calendar,
+#events,
+#quote {
+  float: left;
+  width: 30%;
+  max-width: calc(40% - 1.5rem);
+  padding: 5px;
 }
 
-.sec ul li {
-  list-style: none;
-  margin-left: 20px;
-}
-
-.sec ul li a {
-  text-decoration: none;
-  padding: 6px 30px;
+h2 {
+  display: inline-block;
+  position: sticky;
+  top: 1.5rem;
+  margin-left: 1.5rem;
   color: #ffff;
-  font-size: 12px;
-  border-radius: 20px;
-}
-
-.sec ul li a:hover,
-.sec ul li a.active {
-  background: #ffff;
-  color: #2b1055;
 }
 
 
@@ -179,8 +140,8 @@ section img#mountains_front {
     width: 100%;
     position: fixed;
     z-index: 1;
-    top: -15px;
-    left: 0;
+    top: -35px;
+    left: -35px;
     background: linear-gradient(#20182e, #241142);
     box-shadow: 0 4px 4px -3px #232323;
     -moz-box-shadow: 0 4px 4px -3px #232323;
@@ -222,7 +183,7 @@ margin-top: -30px;
 
 .line1, .line2, .line3 {
   margin-top:5px;
-  top: 10px;
+  top: 2px;
   background-color:#fff;
   width:25px;
   height:3px;
@@ -308,16 +269,18 @@ margin-top: -30px;
 
 
   .icons {
-    margin-top: -38px;
-    
+    margin-top: -45px;
+    margin-left: -10px;
   }
 
 .icon1 {
-  margin-left: 70px;
+  margin-left: 80px;
   color: white;
   font-size: 50px;
+  
 }
 .icon2 {
+  padding-left: -5px;
   padding-right: 5px;
   color: white;
 }
@@ -333,5 +296,3 @@ margin-top: -30px;
 
 
 /* end of hamburger menu style*/
-
-
