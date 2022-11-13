@@ -296,3 +296,24 @@ margin-top: -30px;
 
 
 /* end of hamburger menu style*/
+
+
+
+.largecard {
+  margin-top: -20px;
+  
+}
+
+.mediumcard {
+  margin-top: 500px;
+ 
+}
+
+.plsmoveleft {
+  margin-left: -4000px;
+}
+
+.plsmoveleftmedium {
+  margin-left: 1000px;
+}
+
